@@ -1,6 +1,4 @@
-// ########################################
-// #### closure task 3: cache          ####
-// ########################################
+'use strict'
 
 function createCachingFunction() {
     let cachedValues = {};
