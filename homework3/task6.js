@@ -1,48 +1,26 @@
 'use strict'
 
 function findBiggestMinor(inputMatrix, value = 1) {
-    let biggestSizeCorner = [];
+    let auxMatrix = [];
     for (let i = 0; i < inputMatrix.length; i++) {
-        biggestSizeCorner[i] = [...inputMatrix[i]];
+        auxMatrix[i] = [];
     }
+    let result = 0;
     for (let i = 0; i < inputMatrix.length; i++) {
-        for (let j = 0; j < inputMatrix[0].length; j++) {
-            biggestSizeCorner[i][j] = findBiggestSizeCorner(inputMatrix, i, j, value);
-            //console.log(biggestSizeCorner);
-            //console.log('--------------------------------------------');
-        }
+        auxMatrix[i][0] = inputMatrix[i][0];
     }
-    return biggestSizeCorner;
-}
-
-function findBiggestSizeCorner(inputMatrix, row, col, value) {
-    console.log('entered with');
-    console.log(row, col, value);
-    console.log('inputMatrix dimensions');
-    console.log(inputMatrix.length, inputMatrix[0].length);
-    for (let depth = 0; row + depth < inputMatrix.length && col + depth < inputMatrix[0].length; depth++) {
-        console.log(depth);
-        for (let i = 0; i <= depth; i++) {
-            if (inputMatrix[row + depth][col + i] != value) {
-                console.log(depth);
-                console.log(row, col);
-                console.log('----------------------------------------------------------------------------------------------');
-                return depth;
-            }
-            if (inputMatrix[row + i][col + depth] != value) {
-                console.log(depth);
-                console.log(row, col);
-                console.log('----------------------------------------------------------------------------------------------');
-                return depth;
+    for (let i = 0; i < inputMatrix[0].length; i++) {
+        auxMatrix[0][i] = inputMatrix[0][i];
+    }
+    for (let i = 1; i < inputMatrix.length; i++) {
+        for (let j = 1; j < inputMatrix[0].length; j++) {
+            if (inputMatrix[i][j] === value) {
+                auxMatrix[i][j] = Math.min(auxMatrix[i][j - 1], auxMatrix[i - 1][j], auxMatrix[i - 1][j - 1]) + 1;
+                if (auxMatrix[i][j] > result) {
+                    result = auxMatrix[i][j];
+                }
             }
         }
     }
+    return result;
 }
-
-let matrix = [[1,1,1],
-              [1,1,1],
-              [1,1,1]];
-
-console.log(findBiggestMinor(matrix));
-console.log(matrix);
-
