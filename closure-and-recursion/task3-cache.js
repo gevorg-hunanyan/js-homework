@@ -4,6 +4,7 @@ function createCachingFunction() {
     let cachedValues = {};
     return (value) => {
         if (cachedValues.hasOwnProperty(value)) return cachedValues.value;
-        return value * 2;
+        cachedValues.value = value * 2;
+        return cachedValues.value;
     }
 }
