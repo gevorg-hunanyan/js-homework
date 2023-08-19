@@ -32,4 +32,3 @@ function matrixCutOnTop(inputMatrix, inputCutNumber) {
     }
 }
 
-// toxer heto syuner
