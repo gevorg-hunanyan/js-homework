@@ -2,9 +2,9 @@
 
 const obj = {
     set name(value) {
-        this._name = value.split(', ');
+        this._name = value.split(', ').map(item => [item, item.length]);
     },
     get name() {
-        return [[this._name[0], this._name[0].length], [this._name[1], this._name[1].length]];
+        return this._name;
     },
 };
